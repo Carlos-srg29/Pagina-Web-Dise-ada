@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personajes y Ubicaciones de la Serie</title>
+    <link rel="stylesheet" href="layout.css">
+</head>
+<body>
+
+    <header class="encabezado">
+        <div class="logo-contenedor">
+            <img src="Site-logo.webp" alt="Logo de la web" class="logo" loading="lazy">
+        </div>
+        <button class="btn-hamburguesa" id="btn-hamburguesa" aria-label="Abrir menú de navegación">☰</button>
+        
+        <nav class="navegacion" id="navegacion-principal">
+            <ul>
+                <li class="menu-desplegable" id="item-characters">
+                    <button type="button" class="desplegable-btn" id="btn-characters">
+                        PERSONAJES <span class="flecha">&#9662;</span>
+                    </button>
+                    <ul class="sub-menu">
+                        <li class="menu-subdesplegable" id="item-main-characters">
+                            <a href="#" id="btn-main-characters">Personajes Principales <span>&gt;</span></a>
+                            <ul class="sub-sub-menu">
+                                <li><a href="#arthur">Arthur Leywin</a></li>
+                                <li><a href="#sylvie">Sylvie</a></li>
+                                <li><a href="#tessia">Tessia Eralith</a></li>
+                                <li><a href="#elijah">Elijah Knight</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-subdesplegable" id="item-races">
+                            <a href="#" id="btn-races">Razas <span>&gt;</span></a>
+                            <ul class="sub-sub-menu">
+                                <li><a href="#humans">Humanos</a></li>
+                                <li><a href="#elves">Elfos</a></li>
+                                <li><a href="#dwarves">Enanos</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-subdesplegable" id="item-lances">
+                            <a href="#lances" id="btn-lances">Lanzas <span>&gt;</span></a>
+                            <ul class="sub-sub-menu">
+                                <li><a href="#bairon">Bairon Wykes</a></li>
+                                <li><a href="#varay">Varay Aurae</a></li>
+                                <li><a href="#arthur-lance">Arthur Leywin (Lanza)</a></li>
+                                <li><a href="#aya">Aya Grephin</a></li>
+                                <li><a href="#alea">Alea Triscan</a></li>
+                                <li><a href="#olfred">Olfred Warend</a></li>
+                                <li><a href="#mica">Mica Earthborn</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-subdesplegable" id="item-asura">
+                            <a href="#asura" id="btn-asura">Asura <span>&gt;</span></a>
+                            <ul class="sub-sub-menu">
+                                <li><a href="#sylvie-asura">Sylvie</a></li>
+                                <li><a href="#wren-asura">Wren Kain IV</a></li>
+                                <li><a href="#windsom-asura">Windsom</a></li>
+                                <li><a href="#kordri-asura">Kordri</a></li>
+                                <li><a href="#myre-asura">Myre</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-subdesplegable" id="item-vritra">
+                            <a href="#vritra" id="btn-vritra">Vritra <span>&gt;</span></a>
+                            <ul class="sub-sub-menu">
+                                <li><a href="#vritra-emblem">Emblema del Clan Vritra</a></li>
+                                <li><a href="#cylrit">Cylrit</a></li>
+                                <li><a href="#uto">Uto</a></li>
+                                <li><a href="#cadell">Cadell</a></li>
+                                <li><a href="#caera">Caera (Lady Scythe)</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="menu-desplegable" id="item-universe">
+                    <button type="button" class="desplegable-btn" id="btn-universe">
+                        UNIVERSO <span class="flecha">&#9662;</span>
+                    </button>
+                    <ul class="sub-menu">
+                        <li class="menu-subdesplegable" id="item-locations">
+                            <a href="#locations" id="btn-locations">Ubicaciones <span>&gt;</span></a>
+                            <ul class="sub-sub-menu">
+                                <li><a href="#dicathen">Dicathen</a></li>
+                                <li><a href="#epheotus">Epheotus</a></li>
+                                <li><a href="#alacrya">Alacrya</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#nucleo-ether">Evolución de Maná</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido-principal">
+
+        <!-- BANNER DE BIENVENIDA -->
+        <section class="banner-bienvenida">
+            <img src="56o0q2f5j7x61_Banner.png" alt="Banner TBATE" class="imagen-banner" loading="lazy">
+            <div class="banner-overlay">
+                <p>Guía interactiva de personajes, razas y ubicaciones clave del universo de TBATE.</p>
+            </div>
+        </section>
+
+        <!-- PANEL DE FILTROS Y BÚSQUEDA DINÁMICA -->
+        <div class="contenedor-busqueda-filtros">
+            <input type="text" id="buscador" placeholder="🔍 Buscar personaje o ubicación por nombre..." onkeyup="aplicarFiltros()">
+            
+            <div class="barras-categoria">
+                <button class="btn-filtro activo" onclick="filtrarCategoria('todas', this)">Todas</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('principales', this)">Principales</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('humanos', this)">Humanos</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('elfos', this)">Elfos</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('enanos', this)">Enanos</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('lanzas', this)">Lanzas</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('asura', this)">Asura</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('vritra', this)">Vritra</button>
+                <button class="btn-filtro" onclick="filtrarCategoria('ubicaciones', this)">Ubicaciones</button>
+            </div>
+        </div>
+
+        <!-- MENSAJE DE BÚSQUEDA SIN RESULTADOS -->
+        <div id="mensaje-sin-resultados" class="mensaje-sin-resultados" style="display: none;">
+            <p>⚠️ No se encontraron personajes o ubicaciones con esa búsqueda.</p>
+        </div>
+
+        <!-- PERSONAJES PRINCIPALES -->
+        <section class="seccion-personajes">
+            <h2 class="titulo-seccion">Personajes Principales</h2>
+            <div class="contenedor-galeria">
+                <article class="tarjeta" id="arthur" data-categoria="principales">
+                    <div class="enlace-imagen" onclick="abrirModal('Disciplinary_Committee_Arthur.webp', 'Arthur Leywin')">
+                        <img src="Disciplinary_Committee_Arthur.webp" alt="Arthur Leywin" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Protagonista principal. Reencarnación del Rey Grey. Prodigio único capaz de dominar los cuatro elementos mágicos para proteger a su familia y mundo.</p>
+                        </div>
+                    </div>
+                    <h2>Arthur Leywin</h2>
+                </article>
+
+                <article class="tarjeta" id="sylvie" data-categoria="principales">
+                    <div class="enlace-imagen" onclick="abrirModal('Sylvie.webp', 'Sylvie')">
+                        <img src="Sylvie.webp" alt="Sylvie" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Dragón de la raza mística Asura y vínculo mágico de Arthur. Posee lealtad absoluta y la capacidad de cambiar de forma y dominar el Éter.</p>
+                        </div>
+                    </div>
+                    <h2>Sylvie</h2>
+                </article>
+
+                <article class="tarjeta" id="tessia" data-categoria="principales">
+                    <div class="enlace-imagen" onclick="abrirModal('Xyrus_Academy_Tess.webp', 'Tessia Eralith')">
+                        <img src="Xyrus_Academy_Tess.webp" alt="Tessia Eralith" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Princesa del reino élfico de Elenoir e interés amoroso de Arthur. Poderosa maga que se convierte en líder militar clave de Dicathen.</p>
+                        </div>
+                    </div>
+                    <h2>Tessia Eralith</h2>
+                </article>
+
+                <article class="tarjeta" id="elijah" data-categoria="principales">
+                    <div class="enlace-imagen" onclick="abrirModal('Elijah_Knight.webp', 'Elijah Knight')">
+                        <img src="Elijah_Knight.webp" alt="Elijah Knight" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Mejor amigo de Arthur en la Academia Xyrus. Mago de tierra tímido cuyo pasado esconde secretos clave conectados con Alacrya.</p>
+                        </div>
+                    </div>
+                    <h2>Elijah Knight</h2>
+                </article>
+            </div>
+        </section>
+
+        <!-- HUMANOS -->
+        <section class="seccion-personajes" id="humans">
+            <h2 class="titulo-seccion">Humanos</h2>
+            <div class="contenedor-galeria">
+                <article class="tarjeta" id="alice" data-categoria="humanos">
+                    <div class="enlace-imagen" onclick="abrirModal('AliceLeyein_Humano.webp', 'Alice Leywin')">
+                        <img src="AliceLeyein_Humano.webp" alt="Alice Leywin" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Madre de Arthur y Ellie. Experta maga sanadora del grupo de aventureros Cuernos Gemelos, con un profundo amor maternal.</p>
+                        </div>
+                    </div>
+                    <h2>Alice Leywin</h2>
+                </article>
+
+                <article class="tarjeta" id="ellie" data-categoria="humanos">
+                    <div class="enlace-imagen" onclick="abrirModal('Ellie_Humano.webp', 'Ellie Leywin')">
+                        <img src="Ellie_Humano.webp" alt="Ellie Leywin" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Hermana menor de Arthur. Talentosa arquera capaz de imbuir sus flechas con pura energía de maná.</p>
+                        </div>
+                    </div>
+                    <h2>Ellie Leywin</h2>
+                </article>
+
+                <article class="tarjeta" id="jasmine" data-categoria="humanos">
+                    <div class="enlace-imagen" onclick="abrirModal('JasmineFlamesworth_Humano.webp', 'Jasmine Flamesworth')">
+                        <img src="JasmineFlamesworth_Humano.webp" alt="Jasmine Flamesworth" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Aventurera de Rango AA del grupo Cuernos Gemelos. Experta en dagas y velocidad de viento que actúa como tutora de Arthur.</p>
+                        </div>
+                    </div>
+                    <h2>Jasmine Flamesworth</h2>
+                </article>
+            </div>
+        </section>
+
+        <!-- ELFOS -->
+        <section class="seccion-personajes" id="elves">
+            <h2 class="titulo-seccion">Elfos</h2>
+            <div class="contenedor-galeria">
+                <article class="tarjeta" id="alduin-elf" data-categoria="elfos">
+                    <div class="enlace-imagen" onclick="abrirModal('Alduin_Eralith_Elves.webp', 'Alduin Eralith')">
+                        <img src="Alduin_Eralith_Elves.webp" alt="Alduin Eralith" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Rey de Elenoir y padre de Tessia. Gobernante dedicado a proteger la paz y la cultura de la raza élfica.</p>
+                        </div>
+                    </div>
+                    <h2>Alduin Eralith</h2>
+                </article>
+
+                <article class="tarjeta" id="alea-elf" data-categoria="elfos">
+                    <div class="enlace-imagen" onclick="abrirModal('Alea_Triscan_Elves.webp', 'Alea Triscan')">
+                        <img src="Alea_Triscan_Elves.webp" alt="Alea Triscan" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Lanza Élfica protectora de Dicathen. Su trágico encuentro en la mazmorra revela la primera gran amenaza de los Vritra.</p>
+                        </div>
+                    </div>
+                    <h2>Alea Triscan</h2>
+                </article>
+
+                <article class="tarjeta" id="aya-elf" data-categoria="elfos">
+                    <div class="enlace-imagen" onclick="abrirModal('Aya_Elves.webp', 'Aya Grephin')">
+                        <img src="Aya_Elves.webp" alt="Aya Grephin" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Lanza Élfica apodada Phantasm. Maestra de la magia de viento, el sigilo y la creación de ilusiones mortales.</p>
+                        </div>
+                    </div>
+                    <h2>Aya Grephin</h2>
+                </article>
+
+                <article class="tarjeta" id="helen-elf" data-categoria="elfos">
+                    <div class="enlace-imagen" onclick="abrirModal('HelenShard_Elves.webp', 'Helen Shard')">
+                        <img src="HelenShard_Elves.webp" alt="Helen Shard" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Líder del famoso grupo de aventureros Cuernos Gemelos. Arquera hábil y fiel amiga de la familia Leywin.</p>
+                        </div>
+                    </div>
+                    <h2>Helen Shard</h2>
+                </article>
+
+                <article class="tarjeta" id="lucas-elf" data-categoria="elfos">
+                    <div class="enlace-imagen" onclick="abrirModal('LucasWykes_Elves.webp', 'Lucas Wykes')">
+                        <img src="LucasWykes_Elves.webp" alt="Lucas Wykes" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Mago mestizo élfico/humano de la Casa Wykes. Arrogante, ambicioso y rival directo en la Academia Xyrus.</p>
+                        </div>
+                    </div>
+                    <h2>Lucas Wykes</h2>
+                </article>
+
+                <article class="tarjeta" id="tess-elf" data-categoria="elfos">
+                    <div class="enlace-imagen" onclick="abrirModal('Tess_Elves.webp', 'Tessia Eralith')">
+                        <img src="Tess_Elves.webp" alt="Tessia Eralith" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Heredera al trono de Elenoir. Posee una voluntad de bestia asimilada y una poderosa magia de plantas.</p>
+                        </div>
+                    </div>
+                    <h2>Tessia Eralith</h2>
+                </article>
+
+                <article class="tarjeta" id="virion-elf" data-categoria="elfos">
+                    <div class="enlace-imagen" onclick="abrirModal('VirionEralith_Elves.webp', 'Virion Eralith')">
+                        <img src="VirionEralith_Elves.webp" alt="Virion Eralith" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Ex-Rey Élfico y abuelo de Tessia. Mentor de Arthur en la manipulación de maná y Comandante Supremo de la alianza.</p>
+                        </div>
+                    </div>
+                    <h2>Virion Eralith</h2>
+                </article>
+            </div>
+        </section>
+
+        <!-- ENANOS -->
+        <section class="seccion-personajes" id="dwarves">
+            <h2 class="titulo-seccion">Enanos</h2>
+            <div class="contenedor-galeria">
+                <article class="tarjeta" id="dawsid-dwarf" data-categoria="enanos">
+                    <div class="enlace-imagen" onclick="abrirModal('Dawsid_Dwarves.webp', 'Rey Dawsid')">
+                        <img src="Dawsid_Dwarves.webp" alt="Dawsid" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Rey del reino subterráneo de Darv. Líder pragmático centrado en la prosperidad y supervivencia de su pueblo.</p>
+                        </div>
+                    </div>
+                    <h2>Rey Dawsid</h2>
+                </article>
+
+                <article class="tarjeta" id="greysunder-dwarf" data-categoria="enanos">
+                    <div class="enlace-imagen" onclick="abrirModal('Queen_greysunder_Dwarves.webp', 'Reina Greysunder')">
+                        <img src="Queen_greysunder_Dwarves.webp" alt="Reina Greysunder" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Monarca enana que co-gobierna el reino subterráneo con firme autoridad y orgullo racial.</p>
+                        </div>
+                    </div>
+                    <h2>Reina Greysunder</h2>
+                </article>
+
+                <article class="tarjeta" id="buhndemog-dwarf" data-categoria="enanos">
+                    <div class="enlace-imagen" onclick="abrirModal('Screenshot_2025-03-06_133415_Dwarves.webp', 'Buhndemog')">
+                        <img src="Screenshot_2025-03-06_133415_Dwarves.webp" alt="Buhndemog" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Anciano mago enano maestro en el control de tierra y piedra. Instructor respetado en el manejo de elementos pesados.</p>
+                        </div>
+                    </div>
+                    <h2>Buhndemog</h2>
+                </article>
+
+                <article class="tarjeta" id="doradrea-dwarf" data-categoria="enanos">
+                    <div class="enlace-imagen" onclick="abrirModal('Doradrea_Oreguard_Dwarves.webp', 'Doradrea Oreguard')">
+                        <img src="Doradrea_Oreguard_Dwarves.webp" alt="Doradrea Oreguard" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Matriarca de la noble Casa Oreguard. Influyente figura política en los asuntos internos del reino de Darv.</p>
+                        </div>
+                    </div>
+                    <h2>Doradrea Oreguard</h2>
+                </article>
+
+                <article class="tarjeta" id="rahdeas-dwarf" data-categoria="enanos">
+                    <div class="enlace-imagen" onclick="abrirModal('Rahdeas_Dwarves.webp', 'Rahdeas')">
+                        <img src="Rahdeas_Dwarves.webp" alt="Rahdeas" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Gobernador y figura paternal adoptiva. Esconde oscuras alianzas políticas con fuerzas extranjeras.</p>
+                        </div>
+                    </div>
+                    <h2>Rahdeas</h2>
+                </article>
+
+                <article class="tarjeta" id="olfred-dwarf" data-categoria="enanos">
+                    <div class="enlace-imagen" onclick="abrirModal('Olfred_Dwarves.webp', 'Olfred Warend')">
+                        <img src="Olfred_Dwarves.webp" alt="Olfred Warend" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Lanza Enana capaz de convocar golems de magma y utilizar la tierra con destructiva fuerza bruta.</p>
+                        </div>
+                    </div>
+                    <h2>Olfred Warend</h2>
+                </article>
+
+                <article class="tarjeta" id="mica-dwarf" data-categoria="enanos">
+                    <div class="enlace-imagen" onclick="abrirModal('Mica_Earthborn_Dwarves.webp', 'Mica Earthborn')">
+                        <img src="Mica_Earthborn_Dwarves.webp" alt="Mica Earthborn" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Lanza Enana que manipula la gravedad y la densidad del terreno. Blande un martillo de guerra gigante.</p>
+                        </div>
+                    </div>
+                    <h2>Mica Earthborn</h2>
+                </article>
+            </div>
+        </section>
+
+        <!-- LANZAS -->
+        <section class="seccion-personajes" id="lances">
+            <h2 class="titulo-seccion">Lanzas</h2>
+            <div class="contenedor-galeria">
+                <article class="tarjeta tarjeta-destacada" data-categoria="lanzas">
+                    <div class="enlace-imagen" onclick="abrirModal('Lances.webp', 'Lanzas (Todos)')">
+                        <img src="Lances.webp" alt="Lanzas" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Los 6 magos de Núcleo Blanco más poderosos de Dicathen. Nombrados para defender la paz de las tres razas.</p>
+                        </div>
+                    </div>
+                    <h2>Lanzas (Todos)</h2>
+                </article>
+
+                <article class="tarjeta" id="bairon" data-categoria="lanzas">
+                    <div class="enlace-imagen" onclick="abrirModal('Bairon_Wykes_Lance.webp', 'Bairon Wykes')">
+                        <img src="Bairon_Wykes_Lance.webp" alt="Bairon Wykes" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Lanza Humana de la noble familia Wykes. Dominador indiscutible de la magia de rayo y electricidad.</p>
+                        </div>
+                    </div>
+                    <h2>Bairon Wykes</h2>
+                </article>
+
+                <article class="tarjeta" id="varay" data-categoria="lanzas">
+                    <div class="enlace-imagen" onclick="abrirModal('Varay_Aurae_Lance.webp', 'Varay Aurae')">
+                        <img src="Varay_Aurae_Lance.webp" alt="Varay Aurae" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>La Lanza más poderosa del continente. Capaz de congelar paisajes enteros con su magia de Hielo Absoluto.</p>
+                        </div>
+                    </div>
+                    <h2>Varay Aurae</h2>
+                </article>
+
+                <article class="tarjeta" id="arthur-lance" data-categoria="lanzas">
+                    <div class="enlace-imagen" onclick="abrirModal('Arthur_Lance.webp', 'Arthur Leywin (Lanza)')">
+                        <img src="Arthur_Lance.webp" alt="Arthur Leywin (Lanza)" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>El mago más joven en alcanzar el estatus de Lanza. Nombrado guerrero clave para combatir en la guerra continental.</p>
+                        </div>
+                    </div>
+                    <h2>Arthur Leywin</h2>
+                </article>
+
+                <article class="tarjeta" id="aya" data-categoria="lanzas">
+                    <div class="enlace-imagen" onclick="abrirModal('Aya_Lance.webp', 'Aya Grephin')">
+                        <img src="Aya_Lance.webp" alt="Aya Grephin" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Lanza Élfica especializada en espionaje y asesinato. Controla la niebla, el viento y la ilusión.</p>
+                        </div>
+                    </div>
+                    <h2>Aya Grephin</h2>
+                </article>
+
+                <article class="tarjeta" id="alea" data-categoria="lanzas">
+                    <div class="enlace-imagen" onclick="abrirModal('Alea_Triscan_Lance.webp', 'Alea Triscan')">
+                        <img src="Alea_Triscan_Lance.webp" alt="Alea Triscan" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Lanza Élfica honorable cuyo sacrificio inspira a Arthur a volverse lo suficientemente fuerte para proteger a otros.</p>
+                        </div>
+                    </div>
+                    <h2>Alea Triscan</h2>
+                </article>
+
+                <article class="tarjeta" id="olfred" data-categoria="lanzas">
+                    <div class="enlace-imagen" onclick="abrirModal('Olfred_Warend_Lance.webp', 'Olfred Warend')">
+                        <img src="Olfred_Warend_Lance.webp" alt="Olfred Warend" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Lanza Enana con el título de 'Barón de la Roca'. Mago versátil en magmas subterráneos y trampas de tierra.</p>
+                        </div>
+                    </div>
+                    <h2>Olfred Warend</h2>
+                </article>
+
+                <article class="tarjeta" id="mica" data-categoria="lanzas">
+                    <div class="enlace-imagen" onclick="abrirModal('Mica_Earthborn_Lance.webp', 'Mica Earthborn')">
+                        <img src="Mica_Earthborn_Lance.webp" alt="Mica Earthborn" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Lanza Enana alegre pero letal. Utiliza campos de fuerza gravitacionales para aplastar a sus enemigos.</p>
+                        </div>
+                    </div>
+                    <h2>Mica Earthborn</h2>
+                </article>
+            </div>
+        </section>
+
+        <!-- ASURA -->
+        <section class="seccion-personajes" id="asura">
+            <h2 class="titulo-seccion">Asura</h2>
+            <div class="contenedor-galeria">
+                <article class="tarjeta" id="sylvie-asura" data-categoria="asura">
+                    <div class="enlace-imagen" onclick="abrirModal('Sylvie_Human_Form_Asuras.webp', 'Sylvie (Forma Humana)')">
+                        <img src="Sylvie_Human_Form_Asuras.webp" alt="Sylvie (Forma Humana)" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Sylvie en su forma humanoide. Posee cuernos dorados y herencia pura del poderoso Clan Indrath.</p>
+                        </div>
+                    </div>
+                    <h2>Sylvie</h2>
+                </article>
+
+                <article class="tarjeta" id="wren-asura" data-categoria="asura">
+                    <div class="enlace-imagen" onclick="abrirModal('WrenKainIV_Asuras.webp', 'Wren Kain IV')">
+                        <img src="WrenKainIV_Asuras.webp" alt="Wren Kain IV" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Asura del Clan Titán. Forjador legendario que creó los artefactos mágicos de las seis Lanzas.</p>
+                        </div>
+                    </div>
+                    <h2>Wren Kain IV</h2>
+                </article>
+
+                <article class="tarjeta" id="windsom-asura" data-categoria="asura">
+                    <div class="enlace-imagen" onclick="abrirModal('Windsom_Asuras.webp', 'Windsom')">
+                        <img src="Windsom_Asuras.webp" alt="Windsom" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Emisario del Clan Indrath enviado a Dicathen. Actúa como primer guía de Arthur hacia la tierra divina de Epheotus.</p>
+                        </div>
+                    </div>
+                    <h2>Windsom</h2>
+                </article>
+
+                <article class="tarjeta" id="kordri-asura" data-categoria="asura">
+                    <div class="enlace-imagen" onclick="abrirModal('Kordri_Asuras.webp', 'Kordri')">
+                        <img src="Kordri_Asuras.webp" alt="Kordri" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Asura del Clan Thyestes. Maestro supremo de artes marciales y combate físico que entrena a Arthur.</p>
+                        </div>
+                    </div>
+                    <h2>Kordri</h2>
+                </article>
+
+                <article class="tarjeta" id="myre-asura" data-categoria="asura">
+                    <div class="enlace-imagen" onclick="abrirModal('Myre_Asuras.webp', 'Myre')">
+                        <img src="Myre_Asuras.webp" alt="Myre" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Esposa del Lord Kezess Indrath. Maestra mística que enseña a Arthur los fundamentos de la manipulación del Éter.</p>
+                        </div>
+                    </div>
+                    <h2>Myre</h2>
+                </article>
+            </div>
+        </section>
+
+        <!-- VRITRA -->
+        <section class="seccion-personajes" id="vritra">
+            <h2 class="titulo-seccion">Vritra</h2>
+            <div class="contenedor-galeria">
+                <article class="tarjeta tarjeta-destacada" id="vritra-emblem" data-categoria="vritra">
+                    <div class="enlace-imagen" onclick="abrirModal('Vritra_Emblem.webp', 'Emblema del Clan Vritra')">
+                        <img src="Vritra_Emblem.webp" alt="Emblema del Clan Vritra" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Símbolo del Clan Vritra. Asuras exiliados que gobiernan el continente de Alacrya bajo el mando de Agrona.</p>
+                        </div>
+                    </div>
+                    <h2>Emblema del Clan Vritra</h2>
+                </article>
+
+                <article class="tarjeta" id="cylrit" data-categoria="vritra">
+                    <div class="enlace-imagen" onclick="abrirModal('Cylrit_s.6_Vritra.webp', 'Cylrit')">
+                        <img src="Cylrit_s.6_Vritra.webp" alt="Cylrit" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Retenedor de la Guadaña Caera Denoir. Mago estoico y hábil espadachín de fuego negro.</p>
+                        </div>
+                    </div>
+                    <h2>Cylrit</h2>
+                </article>
+
+                <article class="tarjeta" id="uto" data-categoria="vritra">
+                    <div class="enlace-imagen" onclick="abrirModal('Uto_Vritra.webp', 'Uto')">
+                        <img src="Uto_Vritra.webp" alt="Uto" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Retenedor mestizo despiadado. Domina la magia de fuego negro y picos metálicos sombríos.</p>
+                        </div>
+                    </div>
+                    <h2>Uto</h2>
+                </article>
+
+                <article class="tarjeta" id="cadell" data-categoria="vritra">
+                    <div class="enlace-imagen" onclick="abrirModal('Cadell_Vritra.webp', 'Cadell')">
+                        <img src="Cadell_Vritra.webp" alt="Cadell" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Guadaña Vritra y ejecutor personal de Agrona. Responsable de trágicos acontecimientos en el reino élfico.</p>
+                        </div>
+                    </div>
+                    <h2>Cadell</h2>
+                </article>
+
+                <article class="tarjeta" id="caera" data-categoria="vritra">
+                    <div class="enlace-imagen" onclick="abrirModal('Lady_Scythe_Vritra.webp', 'Lady Scythe (Caera)')">
+                        <img src="Lady_Scythe_Vritra.webp" alt="Lady Scythe" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Caera Denoir. Noble de Alacrya con sangre Vritra que se convierte en una valiosa compañera de aventuras para Arthur.</p>
+                        </div>
+                    </div>
+                    <h2>Lady Scythe (Caera)</h2>
+                </article>
+            </div>
+        </section>
+
+        <!-- UBICACIONES -->
+        <section class="seccion-personajes" id="locations">
+            <h2 class="titulo-seccion">Ubicaciones</h2>
+            <div class="contenedor-galeria">
+                <article class="tarjeta" id="dicathen" data-categoria="ubicaciones">
+                    <div class="enlace-imagen" onclick="abrirModal('Detailed_Dicathen_Map.webp', 'Mapa de Dicathen')">
+                        <img src="Detailed_Dicathen_Map.webp" alt="Mapa de Dicathen" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Continente principal compuesto por tres reinos: Sapin (Humanos), Elenoir (Elfos) y Darv (Enanos).</p>
+                        </div>
+                    </div>
+                    <h2>Dicathen</h2>
+                </article>
+
+                <article class="tarjeta tarjeta-info" id="epheotus" data-categoria="ubicaciones">
+                    <div class="encabezado-info">
+                        <h2>Epheotus</h2>
+                        <p class="subtitulo-info">Información</p>
+                    </div>
+                    <div class="cuerpo-info">
+                        <p><strong>Controlado por:</strong> <span class="destacado-azul">Kezess Indrath</span></p>
+                        <p><strong>Habitantes:</strong></p>
+                        <ul class="lista-info">
+                            <li>Asura</li>
+                            <li>Bestias de Maná</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="tarjeta" id="alacrya" data-categoria="ubicaciones">
+                    <div class="enlace-imagen" onclick="abrirModal('Alacrya_Map.webp', 'Mapa de Alacrya')">
+                        <img src="Alacrya_Map.webp" alt="Mapa de Alacrya" class="imagen-tarjeta" loading="lazy">
+                        <div class="superposicion-texto">
+                            <p>Continente rival altamente militarizado y dividido en Dominios, gobernado autoritariamente por el Clan Vritra.</p>
+                        </div>
+                    </div>
+                    <h2>Alacrya</h2>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE ANIMACIÓN: EVOLUCIÓN DEL NÚCLEO DE MANÁ -->
+        <section class="seccion-personajes" id="nucleo-ether">
+            <h2 class="titulo-seccion">Evolución del Núcleo de Maná</h2>
+            
+            <div class="contenedor-escalas-mana">
+                <!-- Escenario Animado -->
+                <div class="escenario-mana">
+                    <div class="destellos-fondo"></div>
+                    <div id="orbe-central">
+                        <div class="nucleo-centro"></div>
+                        <div class="brillo-ether"></div>
+                        <div class="particula-orbital"></div>
+                    </div>
+                    <!-- Estado en tiempo real del orbe -->
+                    <div class="indicador-etapa">
+                        <span class="label-etapa">Etapa Actual:</span>
+                        <span id="nombre-etapa" class="texto-etapa-animado">Núcleo Rojo (Principiante)</span>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Escala de Poder Enriquecida -->
+                <div class="tarjeta-escala-poder">
+                    <h3>Escala de Poder de Maná</h3>
+                    <p class="descripcion-escala">Progreso de pureza del núcleo de maná y su rango correspondiente:</p>
+                    <ul class="lista-etapas-mana">
+                        <li class="etapa-item etapa-rojo">
+                            <span class="badge-color">Rojo</span>
+                            <div class="info-etapa">
+                                <strong>Principiante</strong>
+                                <small>Primer despertar / Magia básica</small>
+                            </div>
+                        </li>
+                        <li class="etapa-item etapa-naranja">
+                            <span class="badge-color">Naranja</span>
+                            <div class="info-etapa">
+                                <strong>Intermedio</strong>
+                                <small>Mago combatiente avanzado</small>
+                            </div>
+                        </li>
+                        <li class="etapa-item etapa-amarillo">
+                            <span class="badge-color">Amarillo</span>
+                            <div class="info-etapa">
+                                <strong>Experto</strong>
+                                <small>Mago de élite militar</small>
+                            </div>
+                        </li>
+                        <li class="etapa-item etapa-plata">
+                            <span class="badge-color">Plata</span>
+                            <div class="info-etapa">
+                                <strong>Maestro</strong>
+                                <small>Fuerza de combate superior</small>
+                            </div>
+                        </li>
+                        <li class="etapa-item etapa-blanco">
+                            <span class="badge-color">Blanco</span>
+                            <div class="info-etapa">
+                                <strong>Rango Lanza</strong>
+                                <small>Mago supremo continental</small>
+                            </div>
+                        </li>
+                        <li class="etapa-item etapa-ether">
+                            <span class="badge-color">Éter</span>
+                            <div class="info-etapa">
+                                <strong>Dominio Absoluto</strong>
+                                <small>Poder Asura / Manipulación de la realidad</small>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL / LIGHTBOX PARA VER IMÁGENES EN GRANDE -->
+    <div id="modal-imagen" class="modal">
+        <span class="cerrar-modal" onclick="cerrarModal()">&times;</span>
+        <img class="contenido-modal" id="img-modal" alt="Vista ampliada">
+        <div id="titulo-modal" class="caption-modal"></div>
+    </div>
+
+    <!-- BOTÓN FLOTANTE VOLVER ARRIBA -->
+    <a href="#" class="btn-flotante-top" title="Volver arriba">▲</a>
+
+    <footer class="pie-pagina">
+        <p>&copy; The Beginning After The End | Galería Interactiva</p>
+    </footer>
+
+    <script>
+        // Menú Hamburguesa
+        const btnHamburguesa = document.getElementById('btn-hamburguesa');
+        const navegacion = document.getElementById('navegacion-principal');
+
+        btnHamburguesa.addEventListener('click', () => {
+            navegacion.classList.toggle('activa');
+        });
+
+        // Menú Desplegable Nivel 1 y 2
+        const charactersItem = document.getElementById('item-characters');
+        const btnCharacters = document.getElementById('btn-characters');
+        
+        const mainCharactersItem = document.getElementById('item-main-characters');
+        const btnMainCharacters = document.getElementById('btn-main-characters');
+        
+        const racesItem = document.getElementById('item-races');
+        const btnRaces = document.getElementById('btn-races');
+
+        const lancesItem = document.getElementById('item-lances');
+        const btnLances = document.getElementById('btn-lances');
+
+        const asuraItem = document.getElementById('item-asura');
+        const btnAsura = document.getElementById('btn-asura');
+
+        const vritraItem = document.getElementById('item-vritra');
+        const btnVritra = document.getElementById('btn-vritra');
+
+        const universeItem = document.getElementById('item-universe');
+        const btnUniverse = document.getElementById('btn-universe');
+
+        const locationsItem = document.getElementById('item-locations');
+        const btnLocations = document.getElementById('btn-locations');
+
+        const cerrarSubmenus = () => {
+            mainCharactersItem.classList.remove('activo');
+            racesItem.classList.remove('activo');
+            lancesItem.classList.remove('activo');
+            asuraItem.classList.remove('activo');
+            vritraItem.classList.remove('activo');
+            locationsItem.classList.remove('activo');
+        };
+
+        charactersItem.addEventListener('mouseenter', () => charactersItem.classList.add('activo'));
+        charactersItem.addEventListener('mouseleave', () => {
+            charactersItem.classList.remove('activo');
+            cerrarSubmenus();
+        });
+
+        mainCharactersItem.addEventListener('mouseenter', () => mainCharactersItem.classList.add('activo'));
+        mainCharactersItem.addEventListener('mouseleave', () => mainCharactersItem.classList.remove('activo'));
+
+        racesItem.addEventListener('mouseenter', () => racesItem.classList.add('activo'));
+        racesItem.addEventListener('mouseleave', () => racesItem.classList.remove('activo'));
+
+        lancesItem.addEventListener('mouseenter', () => lancesItem.classList.add('activo'));
+        lancesItem.addEventListener('mouseleave', () => lancesItem.classList.remove('activo'));
+
+        asuraItem.addEventListener('mouseenter', () => asuraItem.classList.add('activo'));
+        asuraItem.addEventListener('mouseleave', () => asuraItem.classList.remove('activo'));
+
+        vritraItem.addEventListener('mouseenter', () => vritraItem.classList.add('activo'));
+        vritraItem.addEventListener('mouseleave', () => vritraItem.classList.remove('activo'));
+
+        universeItem.addEventListener('mouseenter', () => universeItem.classList.add('activo'));
+        universeItem.addEventListener('mouseleave', () => {
+            universeItem.classList.remove('activo');
+            cerrarSubmenus();
+        });
+
+        locationsItem.addEventListener('mouseenter', () => locationsItem.classList.add('activo'));
+        locationsItem.addEventListener('mouseleave', () => locationsItem.classList.remove('activo'));
+
+        btnCharacters.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            universeItem.classList.remove('activo');
+            charactersItem.classList.toggle('activo');
+        });
+
+        btnUniverse.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            charactersItem.classList.remove('activo');
+            universeItem.classList.toggle('activo');
+        });
+
+        btnLocations.addEventListener('click', (e) => {
+            const estadoActual = locationsItem.classList.contains('activo');
+            cerrarSubmenus();
+            if (!estadoActual) locationsItem.classList.add('activo');
+        });
+
+        btnMainCharacters.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const estadoActual = mainCharactersItem.classList.contains('activo');
+            cerrarSubmenus();
+            if (!estadoActual) mainCharactersItem.classList.add('activo');
+        });
+
+        btnRaces.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const estadoActual = racesItem.classList.contains('activo');
+            cerrarSubmenus();
+            if (!estadoActual) racesItem.classList.add('activo');
+        });
+
+        btnLances.addEventListener('click', (e) => {
+            const estadoActual = lancesItem.classList.contains('activo');
+            cerrarSubmenus();
+            if (!estadoActual) lancesItem.classList.add('activo');
+        });
+
+        btnAsura.addEventListener('click', (e) => {
+            const estadoActual = asuraItem.classList.contains('activo');
+            cerrarSubmenus();
+            if (!estadoActual) asuraItem.classList.add('activo');
+        });
+
+        btnVritra.addEventListener('click', (e) => {
+            const estadoActual = vritraItem.classList.contains('activo');
+            cerrarSubmenus();
+            if (!estadoActual) vritraItem.classList.add('activo');
+        });
+
+        document.querySelectorAll('.sub-sub-menu a, .sub-menu > li > a').forEach(enlace => {
+            enlace.addEventListener('click', () => {
+                charactersItem.classList.remove('activo');
+                universeItem.classList.remove('activo');
+                cerrarSubmenus();
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!charactersItem.contains(e.target) && !universeItem.contains(e.target)) {
+                charactersItem.classList.remove('activo');
+                universeItem.classList.remove('activo');
+                cerrarSubmenus();
+            }
+        });
+
+        // SISTEMA DE FILTRADO CON DETECCIÓN DE RESULTADOS VACÍOS
+        let categoriaActual = 'todas';
+
+        function filtrarCategoria(categoria, elementoBoton) {
+            categoriaActual = categoria;
+            document.querySelectorAll('.btn-filtro').forEach(btn => btn.classList.remove('activo'));
+            elementoBoton.classList.add('activo');
+            aplicarFiltros();
+        }
+
+        function aplicarFiltros() {
+            const busqueda = document.getElementById('buscador').value.toLowerCase();
+            const tarjetas = document.querySelectorAll('.tarjeta');
+            const mensajeSinResultados = document.getElementById('mensaje-sin-resultados');
+            let tarjetasVisibles = 0;
+
+            tarjetas.forEach(tarjeta => {
+                const nombre = tarjeta.querySelector('h2').textContent.toLowerCase();
+                const categoriaTarjeta = tarjeta.getAttribute('data-categoria');
+
+                const coincideTexto = nombre.includes(busqueda);
+                const coincideCategoria = (categoriaActual === 'todas' || categoriaTarjeta === categoriaActual);
+
+                if (coincideTexto && coincideCategoria) {
+                    tarjeta.style.display = 'block';
+                    tarjetasVisibles++;
+                } else {
+                    tarjeta.style.display = 'none';
+                }
+            });
+
+            if (tarjetasVisibles === 0) {
+                mensajeSinResultados.style.display = 'block';
+            } else {
+                mensajeSinResultados.style.display = 'none';
+            }
+        }
+
+        // MODAL LIGHTBOX
+        function abrirModal(rutaimg, titulo) {
+            const modal = document.getElementById('modal-imagen');
+            const imgModal = document.getElementById('img-modal');
+            const captionModal = document.getElementById('titulo-modal');
+
+            modal.style.display = "block";
+            imgModal.src = rutaimg;
+            captionModal.textContent = titulo;
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-imagen').style.display = "none";
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") {
+                cerrarModal();
+            }
+        });
+
+        // ACTUALIZACIÓN DINÁMICA DEL TEXTO DE ETAPA DEL NÚCLEO
+        const textoEtapa = document.getElementById('nombre-etapa');
+        const etapas = [
+            "Núcleo Rojo (Principiante)",
+            "Núcleo Naranja (Intermedio)",
+            "Núcleo Amarillo (Experto)",
+            "Núcleo Plata (Maestro)",
+            "Núcleo Blanco (Rango Lanza)",
+            "Núcleo de Éter (Poder Asura)"
+        ];
+
+        let indiceEtapa = 0;
+        setInterval(() => {
+            indiceEtapa = (indiceEtapa + 1) % etapas.length;
+            if (textoEtapa) {
+                textoEtapa.textContent = etapas[indiceEtapa];
+            }
+        }, 2400);
+    </script>
+
+</body>
+</html>
